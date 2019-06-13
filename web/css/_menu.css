@@ -1,0 +1,13 @@
+ul.catalog {
+    padding: 15px;
+}
+
+.category-products ul {
+    padding-left: 20px;
+}
+.category-products li {
+    padding: 5px 0;
+}
+.category-products li a{
+    padding: 5px 0;
+}

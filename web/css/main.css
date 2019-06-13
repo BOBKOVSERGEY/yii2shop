@@ -1,4 +1,4 @@
-﻿
+﻿@import "_menu.css";
 /*************************
 *******Typography******
 **************************/
@@ -719,7 +719,8 @@ h2.title:before{
   padding: 5px 20px;
 }
 
-.category-products .panel-default .panel-heading .panel-title a {
+.category-products .panel-default .panel-heading .panel-title a,
+.category-products li a {
   color: #696763;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
@@ -731,7 +732,8 @@ h2.title:before{
   border-top: 0 none;
 }
 
-.category-products .panel-default .badge {
+.category-products .panel-default .badge,
+.category-products li a span{
   background:none;
   border-radius: 10px;
   color: #696763;
@@ -744,6 +746,10 @@ h2.title:before{
   text-align: center;
   vertical-align: baseline;
   white-space: nowrap;
+}
+
+.category-products ul li ul li a{
+  font-size: 12px;
 }
 
 .panel-body ul{

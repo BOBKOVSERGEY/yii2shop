@@ -4,6 +4,7 @@ namespace app\components;
 
 use app\models\Category;
 use yii\base\Widget;
+use Yii;
 
 class MenuWidget extends Widget
 {
@@ -30,11 +31,20 @@ class MenuWidget extends Widget
   // run
   public function run()
   {
+    // попытаемся получить данные из cache
+    $menu = Yii::$app->cache->get('menu');
+
+    if ($menu) return $menu;
+
     // ->asArray - возвращает полученные данные в виде обычного массива
     // ->indexBy - какую колонку использовать для именования ключей массива
     $this->data = Category::find()->indexBy('id')->asArray()->all();
     $this->tree = $this->getTree();
     $this->menuHtml = $this->getMenuHtml($this->tree);
+
+    // запись в кеш set Cache
+    Yii::$app->cache->set('menu', $this->menuHtml, 60);
+
     return $this->menuHtml;
   }
 
