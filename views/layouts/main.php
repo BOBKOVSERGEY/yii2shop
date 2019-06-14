@@ -21,8 +21,6 @@ LtAppAsset::register($this);
 <head>
   <meta charset="<?= Yii::$app->charset ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="">
   <?php $this->registerCsrfMetaTags() ?>
   <title><?= Html::encode($this->title) ?></title>
   <?php $this->head() ?>
@@ -68,7 +66,7 @@ LtAppAsset::register($this);
       <div class="row">
         <div class="col-sm-4">
           <div class="logo pull-left">
-            <a href="/"><img src="/images/home/logo.png" alt="" /></a>
+            <a href="<?php echo \yii\helpers\Url::home(); ?>"><?php echo Html::img('@web/images/home/logo.png', ['alt' => 'E shopper'])?></a>
           </div>
           <div class="btn-group pull-right">
             <div class="btn-group">

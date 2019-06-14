@@ -2,7 +2,7 @@
 use \yii\helpers\Html;
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+//$this->title = 'My Yii Application';
 ?>
 <section id="slider"><!--slider-->
   <div class="container">
@@ -122,7 +122,7 @@ $this->title = 'My Yii Application';
                 <div class="productinfo text-center">
                   <?php echo Html::img('@web/images/products/' . $hit->img, ['alt'=> $hit->name]); ?>
                   <h2>$<?php echo $hit->price; ?></h2>
-                  <p><?php echo $hit->name; ?></p>
+                  <p><a href="<?php echo \yii\helpers\Url::to(['product/view', 'id' => $hit->id])?>"><?php echo $hit->name; ?></a></p>
                   <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                 </div>
                 <?php if ($hit->new) { ?>
