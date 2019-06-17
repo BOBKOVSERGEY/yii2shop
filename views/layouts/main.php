@@ -98,7 +98,7 @@ LtAppAsset::register($this);
               <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
               <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
               <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-              <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+              <li><a href="#" class="cart-btn"><i class="fa fa-shopping-cart"></i> Cart</a></li>
               <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
             </ul>
           </div>
@@ -144,7 +144,9 @@ LtAppAsset::register($this);
         </div>
         <div class="col-sm-3">
           <div class="search_box pull-right">
-            <input type="text" placeholder="Search"/>
+            <form action="<?php echo \yii\helpers\Url::to(['category/search'])?>" method="get">
+              <input type="text" name="q" placeholder="Search">
+            </form>
           </div>
         </div>
       </div>
@@ -311,6 +313,19 @@ LtAppAsset::register($this);
   </div>
 
 </footer><!--/Footer-->
+<?php
+\yii\bootstrap\Modal::begin([
+  'header' => '<h2>Корзина</h2>',
+  'id' => 'cart',
+  'size' => 'modal-lg',
+  'footer' => '
+              <button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
+              <button type="button" class="btn btn-success">Оформить заказ</button>
+              <button type="button" class="btn btn-danger clear-cart">Очистить</button>
+              '
+]);
+\yii\bootstrap\Modal::end();
+?>
 
 <?php $this->endBody() ?>
 </body>

@@ -31,6 +31,84 @@ $(document).ready(function(){
 
 $(function () {
 	$('.catalog').dcAccordion({
-		speed: 300,
+		speed: 300
 	});
+
+	function clearCart() {
+		$.ajax({
+			url: '/cart/clear',
+			type: 'GET',
+			success: function (res) {
+				if (!res) console.log('Error');
+				//console.log(res);
+				showCart(res);
+			},
+			error: function (res) {
+				console.log('Error', res);
+			}
+		})
+	}
+
+	$('.clear-cart').on('click', clearCart);
+
+	function showCart(data) {
+		$('#cart .modal-body').html(data);
+		$('#cart').modal();
+	}
+
+	$('.add-to-cart').on('click', function (e) {
+		e.preventDefault();
+		var id = $(this).data('id');
+		$.ajax({
+			url: '/cart/add',
+			data: {id:id},
+			type: 'GET',
+			success: function (res) {
+				if (!res) console.log('Error');
+				//console.log(res);
+				showCart(res);
+			},
+			error: function (res) {
+				console.log('Error', res);
+			}
+		})
+	});
+
+	// делигируем события
+	$('#cart .modal-body').on('click', '.del-item', function () {
+		var id = $(this).data('id');
+		$.ajax({
+			url: '/cart/del-item',
+			data: {id:id},
+			type: 'GET',
+			success: function (res) {
+				if (!res) console.log('Error');
+				//console.log(res);
+				showCart(res);
+			},
+			error: function (res) {
+				console.log('Error', res);
+			}
+		})
+	});
+
+	function getCart(e) {
+		e.preventDefault();
+		$.ajax({
+			url: '/cart/show',
+			type: 'GET',
+			success: function (res) {
+				if (!res) console.log('Error');
+				//console.log(res);
+				showCart(res);
+			},
+			error: function (res) {
+				console.log('Error', res);
+			}
+		})
+	}
+
+	$('.cart-btn').on('click', getCart)
+
+
 });
