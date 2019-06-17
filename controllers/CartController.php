@@ -24,8 +24,8 @@ class CartController extends AppController
 
     // убираем шаблон
     $this->layout = false;
-
     return $this->render('cart-model', compact('session'));
+
   }
 
   public function actionClear()
@@ -50,7 +50,6 @@ class CartController extends AppController
     $cart->recalc($id);
     // убираем шаблон
     $this->layout = false;
-
     return $this->render('cart-model', compact('session'));
   }
 
@@ -62,5 +61,23 @@ class CartController extends AppController
     $this->layout = false;
 
     return $this->render('cart-model', compact('session'));
+  }
+
+  public function actionCountItems()
+  {
+    $session = Yii::$app->session;
+    $session->open();
+    $this->layout = false;
+    // Проверка наличия товаров в корзине
+    if (isset($session['cart'])) {
+      // Если массив с товарами есть
+      // Подсчитаем и вернем их количество
+      $count = 0;
+
+      return $count = count($session['cart']);
+    } else {
+      // Если товаров нет, вернем 0
+      return 0;
+    }
   }
 }

@@ -1,4 +1,6 @@
-<?php if (!empty($session['cart'])) { ?>
+<?php if (!empty($session['cart'])) {
+  $countItems = count($session['cart']);
+  ?>
   <div class="table-responsive">
     <table class="table table-hover table-striped">
       <thead>
@@ -20,6 +22,10 @@
             <td class="text-center"><i data-id="<?php echo $id; ?>" class="fa fa-times text-danger del-item"></i></td>
           </tr>
         <?php } ?>
+        <tr>
+          <td colspan="4">Товаров:</td>
+          <td class="text-right"><span id="modal-cart-count"><?php echo $countItems;?></span></td>
+        </tr>
       <tr>
         <td colspan="4">Итого: </td>
         <td class="text-right"><?php echo $session['cart.qty']; ?></td>

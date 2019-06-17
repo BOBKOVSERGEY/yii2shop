@@ -53,6 +53,7 @@ $(function () {
 
 	function showCart(data) {
 		$('#cart .modal-body').html(data);
+		$('#basket-count').html($('#modal-cart-count').text());
 		$('#cart').modal();
 	}
 
@@ -65,7 +66,7 @@ $(function () {
 			type: 'GET',
 			success: function (res) {
 				if (!res) console.log('Error');
-				//console.log(res);
+				console.log(res);
 				showCart(res);
 			},
 			error: function (res) {
@@ -73,6 +74,20 @@ $(function () {
 			}
 		})
 	});
+
+	/*$('.add-to-cart').on('click', function (e) {
+		e.preventDefault();
+		$.ajax({
+			url: '/cart/count-items',
+			type: 'GET',
+			success: function (res) {
+				console.log(res);
+			},
+			error: function (res) {
+				console.log('Error', res);
+			}
+		})
+	});*/
 
 	// делигируем события
 	$('#cart .modal-body').on('click', '.del-item', function () {
@@ -91,6 +106,7 @@ $(function () {
 			}
 		})
 	});
+
 
 	function getCart(e) {
 		e.preventDefault();
