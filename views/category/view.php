@@ -63,7 +63,7 @@
                       <?php echo Html::img('@web/images/products/' . $product->img, ['alt'=> $product->name]); ?>
                       <h2>$<?php echo $product->price; ?></h2>
                       <p><a href="<?php echo \yii\helpers\Url::to(['product/view', 'id' => $product->id])?>"><?php echo $product->name; ?></a></p>
-                      <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                      <a href="<?php echo \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>"  data-id="<?php echo $product->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
                     <?php if ($product->new) { ?>
                       <?php echo Html::img('@web/images/home/new.png', ['alt'=> 'Новинка', 'class' => 'new']); ?>

@@ -98,11 +98,11 @@ use yii\helpers\Html;
               <span>
 									<span>US $<?php echo $product->price; ?></span>
 									<label>Quantity:</label>
-									<input type="text" value="1" />
-									<button type="button" class="btn btn-fefault cart">
+									<input type="text" value="1" id="qty" />
+									<a href="<?php echo \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?php echo $product->id; ?>" class="btn btn-fefault add-to-cart cart">
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
-									</button>
+									</a>
 								</span>
               <p><b>Availability:</b> In Stock</p>
               <p><b>Condition:</b> New</p>
@@ -320,7 +320,7 @@ use yii\helpers\Html;
                         <?php echo Html::img('@web/images/products/'. $hit->img, ['alt' => $hit->name]); ?>
                         <h2>$<?php echo $hit->price; ?></h2>
                         <p><a href="<?php echo \yii\helpers\Url::to(['product/view', 'id' => $hit->id])?>"><?php echo $hit->name; ?></a></p>
-                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                        <a href="<?php echo \yii\helpers\Url::to(['cart/add', 'id' => $hit->id])?>"  data-id="<?php echo $hit->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                       </div>
                     </div>
                   </div>

@@ -12,6 +12,9 @@ class CartController extends AppController
   public function actionAdd()
   {
     $id = Yii::$app->request->get('id');
+    $qty = (int)Yii::$app->request->get('qty');
+    $qty = !$qty ? 1 : $qty;
+
     $product = Product::findOne($id);
 
     if (empty($product)) return false;
@@ -20,7 +23,7 @@ class CartController extends AppController
     $session->open();
 
     $cart = new Cart();
-    $cart->addToCart($product);
+    $cart->addToCart($product, $qty);
 
     // убираем шаблон
     $this->layout = false;
@@ -79,5 +82,10 @@ class CartController extends AppController
       // Если товаров нет, вернем 0
       return 0;
     }
+  }
+
+  public function actionView()
+  {
+    return $this->render('view');
   }
 }

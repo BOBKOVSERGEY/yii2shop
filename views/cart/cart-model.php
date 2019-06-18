@@ -39,4 +39,5 @@
   </div>
 <?php } else { ?>
   <h3 class="text-center">Ваша корзина пуста</h3>
+  <span style="display: none;" id="modal-cart-count">0</span>
 <?php } ?>
