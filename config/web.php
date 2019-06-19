@@ -9,6 +9,12 @@ $config = [
     'bootstrap' => ['log'],
     'language' => 'ru',
     'defaultRoute' => 'category/index',
+    'modules' => [
+      'admin' => [
+        'class' => 'app\modules\admin\Module',
+        'layout' => 'admin'
+      ],
+    ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -34,7 +40,15 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+              'class' => 'Swift_SmtpTransport',
+              'host' => 'smtp.gmail.com',
+              'username' => 'esdipochta@gmail.com',
+              'password' => '*********',
+              'port' => '465',
+              'encryption' => 'ssl',
+            ]
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
