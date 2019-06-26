@@ -95,7 +95,9 @@ LtAppAsset::register($this);
         <div class="col-sm-8">
           <div class="shop-menu pull-right">
             <ul class="nav navbar-nav">
-              <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+              <?php if (!Yii::$app->user->isGuest) { ?>
+              <li><a href="<?php echo \yii\helpers\Url::to(['/site/logout']); ?>"><i class="fa fa-sign-out"></i> <?php echo Yii::$app->user->identity['username']; ?> Выход</a></li>
+              <?php } ?>
               <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
               <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
               <li><a href="#" class="cart-btn"><i class="fa fa-shopping-cart"></i><span class="badge badge-pill badge-info"><span id="basket-count"><?php echo count($_SESSION['cart']); ?></span></span> Cart</a></li>

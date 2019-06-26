@@ -1,9 +1,8 @@
 <?php
 
-namespace app\models;
-use yii\db\ActiveRecord;
-use yii\behaviors\TimestampBehavior;
-use yii\db\Expression;
+namespace app\modules\admin\models;
+
+use Yii;
 
 /**
  * This is the model class for table "order".
@@ -19,7 +18,7 @@ use yii\db\Expression;
  * @property string $phone
  * @property string $address
  */
-class Order extends ActiveRecord
+class Order extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -34,32 +33,17 @@ class Order extends ActiveRecord
       return $this->hasMany(OrderItems::class, ['order_id' => 'id']);
     }
 
-    public function behaviors()
-    {
-      return [
-        [
-          'class' => TimestampBehavior::class,
-          'attributes' => [
-            ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
-            ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
-          ],
-          // если вместо метки времени UNIX используется datetime:
-          'value' => new Expression('NOW()'),
-        ],
-      ];
-    }
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['name', 'email', 'phone', 'address'], 'required'],
+            [['created_at', 'updated_at', 'qty', 'sum', 'name', 'email', 'phone', 'address'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['qty'], 'integer'],
             [['sum'], 'number'],
-            [['status'], 'boolean'],
+            [['status'], 'string'],
             [['name', 'email', 'phone', 'address'], 'string', 'max' => 255],
         ];
     }
@@ -70,6 +54,12 @@ class Order extends ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => '№ заказа',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата изменения',
+            'qty' => 'Кол-во',
+            'sum' => 'Сумма',
+            'status' => 'Статус',
             'name' => 'Имя',
             'email' => 'Email',
             'phone' => 'Телефон',
