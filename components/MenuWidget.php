@@ -9,7 +9,7 @@ use Yii;
 class MenuWidget extends Widget
 {
   public $tpl;
-
+  public $model;
   public $data;
   public $tree;
   public $menuHtml;
@@ -31,10 +31,14 @@ class MenuWidget extends Widget
   // run
   public function run()
   {
-    // попытаемся получить данные из cache
-    $menu = Yii::$app->cache->get('menu');
 
-    if ($menu) return $menu;
+    if ($this->tpl == 'menu.php') {
+      // попытаемся получить данные из cache
+      $menu = Yii::$app->cache->get('menu');
+
+      if ($menu) return $menu;
+    }
+
 
     // ->asArray - возвращает полученные данные в виде обычного массива
     // ->indexBy - какую колонку использовать для именования ключей массива
@@ -42,9 +46,10 @@ class MenuWidget extends Widget
     $this->tree = $this->getTree();
     $this->menuHtml = $this->getMenuHtml($this->tree);
 
-    // запись в кеш set Cache
-    Yii::$app->cache->set('menu', $this->menuHtml, 60);
-
+    if ($this->tpl == 'menu.php') {
+      // запись в кеш set Cache
+      Yii::$app->cache->set('menu', $this->menuHtml, 60);
+    }
     return $this->menuHtml;
   }
 
@@ -59,15 +64,15 @@ class MenuWidget extends Widget
     return $tree;
   }
 
-  protected function getMenuHtml($tree){
+  protected function getMenuHtml($tree, $tab = ''){
     $str = '';
     foreach ($tree as $category) {
-      $str .= $this->catToTemplate($category);
+      $str .= $this->catToTemplate($category, $tab);
     }
     return $str;
   }
 
-  protected function catToTemplate($category){
+  protected function catToTemplate($category, $tab){
     ob_start();
     include __DIR__ . '/menu_tpl/' . $this->tpl;
     return ob_get_clean();
