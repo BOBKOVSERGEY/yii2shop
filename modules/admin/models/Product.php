@@ -87,6 +87,8 @@ class Product extends \yii\db\ActiveRecord
       if ($this->validate()) {
         $path = 'upload/store/' . $this->image->baseName . '.' . $this->image->extension;
         $this->image->saveAs($path);
+        $this->attachImage($path);
+        @unlink($path);
         return true;
       } else {
         return false;
